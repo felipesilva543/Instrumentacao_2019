@@ -108,6 +108,18 @@ void loop() {
 //    ligarVentoinha(1);
 //  }
 //}
+
+servo.write(90);
+
+//for(pos = 0; pos < 180; pos++){ //PARA "pos" IGUAL A 0, ENQUANTO "pos" MENOR QUE 180, INCREMENTA "pos"
+//  servo.write(pos); //ESCREVE O VALOR DA POSIÇÃO QUE O SERVO DEVE GIRAR
+//  delay(15); //INTERVALO DE 15 MILISSEGUNDOS
+//}
+//delay(1000); //INTERVALO DE 1 SEGUNDO
+//for(pos = 180; pos >= 0; pos--){ //PARA "pos" IGUAL A 180, ENQUANTO "pos" MAIOR OU IGUAL QUE 0, DECREMENTA "pos"
+//  servo.write(pos); //ESCREVE O VALOR DA POSIÇÃO QUE O SERVO DEVE GIRAR
+//  delay(15); //INTERVALO DE 15 MILISSEGUNDOS
+//}
   
 
   
