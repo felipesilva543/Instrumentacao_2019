@@ -20,6 +20,7 @@ float t = 0;  // Temperatura
 #define SERVO        3        // Porta Digital onde o Sinal do servo esta conectado
 #define DHTPIN       A1       // PORTA ANALÓGICA QUE CONECTA O SENSOR DHT11
 #define DHTTYPE      DHT11    // DHT 11
+#define VENTOINHA        8
                                          // Intanciação do Objeto Servo Motor
 LiquidCrystal lcd(12, 11, 7, 6, 5, 4);                        // Define os pinos que serão utilizados para ligação ao display
 DHT dht(DHTPIN, DHTTYPE);
@@ -46,9 +47,9 @@ void interruptionPresSensor(){
 }
 
 void ligarVentoinha(int indoVindo){
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(5000);
-  digitalWrite(LED_BUILTIN, LOW);   // turn the LED off (LOW is the voltage level)
+  digitalWrite(VENTOINHA, LOW);   // turn the LED on (HIGH is the voltage level)
+  delay(10000);
+  digitalWrite(VENTOINHA, HIGH);   // turn the LED off (LOW is the voltage level)
 //  if(indoVindo = 0){
 //    servo.write(pos--);  
 //  }else if(indoVindo = 1){
@@ -76,9 +77,10 @@ void setup() {
   lcd.begin(16, 2); // Init LCD
   dht.begin();      // Init DHT11
   servo.attach(SERVO); // Init Servo
-  pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(8, OUTPUT);
-
+  pinMode(VENTOINHA, OUTPUT);
+  
+  digitalWrite(VENTOINHA, HIGH);
+  
   primeiraLeitura();
   
   // Inicialização timer 2
@@ -109,36 +111,36 @@ void loop() {
 
 /*Controle Servo Motor.*/
 
-//for(pos = 0; pos < 180; pos++){ //PARA "pos" IGUAL A 0, ENQUANTO "pos" MENOR QUE 180, INCREMENTA "pos"
-//  servo.write(pos); //ESCREVE O VALOR DA POSIÇÃO QUE O SERVO DEVE GIRAR
-//  delay(15); //INTERVALO DE 15 MILISSEGUNDOS
-//  if(auxSenPre){
-//    ligarVentoinha(0);
-//  }
-//}
-//delay(1000); //INTERVALO DE 1 SEGUNDO
-//for(pos = 180; pos >= 0; pos--){ //PARA "pos" IGUAL A 180, ENQUANTO "pos" MAIOR OU IGUAL QUE 0, DECREMENTA "pos"
-//  servo.write(pos); //ESCREVE O VALOR DA POSIÇÃO QUE O SERVO DEVE GIRAR
-//  delay(15); //INTERVALO DE 15 MILISSEGUNDOS
-//  if(auxSenPre){
-//    ligarVentoinha(1);
-//  }
-//}
-//delay(1000); //INTERVALO DE 1 SEGUNDO
-
-
 for(pos = 0; pos < 180; pos++){ //PARA "pos" IGUAL A 0, ENQUANTO "pos" MENOR QUE 180, INCREMENTA "pos"
   servo.write(pos); //ESCREVE O VALOR DA POSIÇÃO QUE O SERVO DEVE GIRAR
-  Serial.println("For 1");
   delay(15); //INTERVALO DE 15 MILISSEGUNDOS
+  if(auxSenPre){
+    ligarVentoinha(0);
+  }
 }
 delay(1000); //INTERVALO DE 1 SEGUNDO
 for(pos = 180; pos >= 0; pos--){ //PARA "pos" IGUAL A 180, ENQUANTO "pos" MAIOR OU IGUAL QUE 0, DECREMENTA "pos"
   servo.write(pos); //ESCREVE O VALOR DA POSIÇÃO QUE O SERVO DEVE GIRAR
-  Serial.println("For 2");
   delay(15); //INTERVALO DE 15 MILISSEGUNDOS
+  if(auxSenPre){
+    ligarVentoinha(1);
+  }
 }
 delay(1000); //INTERVALO DE 1 SEGUNDO
+
+
+//for(pos = 0; pos < 180; pos++){ //PARA "pos" IGUAL A 0, ENQUANTO "pos" MENOR QUE 180, INCREMENTA "pos"
+//  servo.write(pos); //ESCREVE O VALOR DA POSIÇÃO QUE O SERVO DEVE GIRAR
+//  Serial.println("For 1");
+//  delay(15); //INTERVALO DE 15 MILISSEGUNDOS
+//}
+//delay(1000); //INTERVALO DE 1 SEGUNDO
+//for(pos = 180; pos >= 0; pos--){ //PARA "pos" IGUAL A 180, ENQUANTO "pos" MAIOR OU IGUAL QUE 0, DECREMENTA "pos"
+//  servo.write(pos); //ESCREVE O VALOR DA POSIÇÃO QUE O SERVO DEVE GIRAR
+//  Serial.println("For 2");
+//  delay(15); //INTERVALO DE 15 MILISSEGUNDOS
+//}
+//delay(1000); //INTERVALO DE 1 SEGUNDO
   
 
   
